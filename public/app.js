@@ -1,6 +1,6 @@
-$.getJSON("/articles", function (data) {
+$.getJSON("/edharticles", function (data) {
 
-  for (var i = 0; i < data.length; i +) {
+  for (var i = 0; i < data.length; i++) {
 
     $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
 
@@ -15,7 +15,7 @@ $(document).on("click", "p", function () {
 
   $.ajax({
     method: "GET",
-    url: "/articles/" + thisId
+    url: "/edharticles/" + thisId
   })
 
     .then(function (data) {
@@ -29,11 +29,11 @@ $(document).on("click", "p", function () {
 
       $("#notes").append("<button data-id='" + data._id + "' id='savenote'>Save Notes</button>");
 
-      if (data.note) {
+      if (data.edhnote) {
 
-        $("#titleiniput").val(data.note.title);
+        $("#titleiniput").val(data.edhNote.title);
 
-        $("#bodyinput").val(data.note.body);
+        $("#bodyinput").val(data.edhNote.body);
       }
     });
 });
@@ -44,7 +44,7 @@ $(document).on("click", "#savenote", function () {
 
   $.ajax({
     method: "POST",
-    url: "/articles/" + thisId,
+    url: "/edharticles/" + thisId,
 
     data: {
       title: $("#titleinput").val(),

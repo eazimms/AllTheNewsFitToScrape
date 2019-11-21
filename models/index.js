@@ -1,4 +1,4 @@
 module.exports = {
-  CArticle: require("./Carticle"), 
-  EDHnotes: require("./edhNotes")
-}; 
+  edhArticle: require("./edhArticle"),
+  edhNote: require("./edhNote")
+};
