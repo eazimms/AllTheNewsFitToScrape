@@ -1,11 +1,38 @@
-$.getJSON("/edharticles", function (data) {
+
+
+
+$.getJSON("/edharticle", function (data) {
 
   for (var i = 0; i < data.length; i++) {
 
     $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
 
   }
+  
 });
+
+$("#cfbMtg").on("click", function(){
+  $("#articles").empty(); 
+  $.getJSON("/edharticle", function (data){
+    for (var i = 0; i < data.length; i++){
+      $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
+
+    }
+  }); 
+}); 
+
+$("#mtgGF").on("click", function(){
+  $("#articles").empty(); 
+  $.getJSON("/gfarticle", function (data){
+    for (var i = 0; i < data.length; i++){
+      $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
+
+    }
+  }); 
+}); 
+
+
+
 
 $(document).on("click", "p", function () {
 
@@ -15,7 +42,7 @@ $(document).on("click", "p", function () {
 
   $.ajax({
     method: "GET",
-    url: "/edharticles/" + thisId
+    url: "/edharticle/" + thisId
   })
 
     .then(function (data) {
@@ -31,9 +58,9 @@ $(document).on("click", "p", function () {
 
       if (data.edhnote) {
 
-        $("#titleiniput").val(data.edhNote.title);
+        $("#titleiniput").val(data.edhnote.title);
 
-        $("#bodyinput").val(data.edhNote.body);
+        $("#bodyinput").val(data.edhnote.body);
       }
     });
 });
@@ -44,7 +71,10 @@ $(document).on("click", "#savenote", function () {
 
   $.ajax({
     method: "POST",
-    url: "/edharticles/" + thisId,
+    url: "/edharticle/" + thisId, 
+
+    method: "POST", 
+    url: "/edharticle/" + thisId, 
 
     data: {
       title: $("#titleinput").val(),
@@ -57,8 +87,12 @@ $(document).on("click", "#savenote", function () {
       console.log(data);
 
       $("#notes").emtpy();
+      $("#bodyinput").empty(); 
     });
 
   $("#titleinput").val("");
   $("#bodyinput").val("");
-}); 
+});
+
+
+

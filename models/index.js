@@ -1,4 +1,5 @@
 module.exports = {
   edhArticle: require("./edhArticle"),
-  edhNote: require("./edhNote")
+  edhNote: require("./edhNote"),
+  gfArticle: require("./gfArticle")
 };
