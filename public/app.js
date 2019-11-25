@@ -1,5 +1,5 @@
 
-
+var urls = ["/edharticle", "gfarticle", "redditarticle"]; 
 
 $.getJSON("/edharticle", function (data) {
 
@@ -31,6 +31,16 @@ $("#mtgGF").on("click", function(){
   }); 
 }); 
 
+$("#rMtg").on("click", function(){
+  $("#articles").empty(); 
+  $.getJSON("/redditarticle", function (data){
+    for (var i = 0; i < data.length; i++){
+      $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" +"<href=" + data[i].link +"/>" + "</p>");
+
+    }
+  }); 
+}); 
+
 
 
 
@@ -40,10 +50,15 @@ $(document).on("click", "p", function () {
 
   var thisId = $(this).attr("data-id");
 
+  
+
   $.ajax({
     method: "GET",
-    url: "/edharticle/" + thisId
+    url: "/edharticle/"  + thisId, 
+
+  
   })
+  
 
     .then(function (data) {
       console.log(data);
@@ -65,6 +80,8 @@ $(document).on("click", "p", function () {
     });
 });
 
+
+
 $(document).on("click", "#savenote", function () {
 
   var thisId = $(this).attr("data-id");
@@ -72,10 +89,6 @@ $(document).on("click", "#savenote", function () {
   $.ajax({
     method: "POST",
     url: "/edharticle/" + thisId, 
-
-    method: "POST", 
-    url: "/edharticle/" + thisId, 
-
     data: {
       title: $("#titleinput").val(),
 
@@ -87,7 +100,7 @@ $(document).on("click", "#savenote", function () {
       console.log(data);
 
       $("#notes").emtpy();
-      $("#bodyinput").empty(); 
+      
     });
 
   $("#titleinput").val("");

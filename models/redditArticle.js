@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
-var edhArticleSchema = new Schema({
+var redditArticleSchema = new Schema({
   
   title: {
     type: String,
@@ -18,6 +18,6 @@ var edhArticleSchema = new Schema({
   }
 });
 
-var edhArticle = mongoose.model("edhArticle", edhArticleSchema);
+var redditArticle = mongoose.model("redditArticle", redditArticleSchema);
 
-module.exports = edhArticle;
+module.exports = redditArticle;
